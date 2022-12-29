@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar bg-primary">
-    <a class="navbar-brand text-white" href="">
+    <a class="navbar-brand text-white" href="/">
       <img
         src="@/assets/logo.svg"
         alt=""
         class="d-inline-block align-text-top mx-2"
         height="30"
       />
-      DayBook
+      DayBook {{ $store.state.journal.isLoading }}
     </a>
 
     <div class="d-flex">
@@ -17,3 +17,7 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {}
+</script>
