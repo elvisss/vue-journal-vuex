@@ -11,5 +11,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '~bootstrap': fileURLToPath(new URL('node_modules/bootstrap', import.meta.url)),
     }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "sass:color";'
+      }
+    }
   }
 })
