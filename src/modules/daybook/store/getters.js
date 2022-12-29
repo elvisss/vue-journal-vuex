@@ -1,3 +1,5 @@
-/* export const myGetter = (state) => {
-  return state
-} */
+export const getEntriesByTerm = (_state) => {
+}
+
+export const getEntryById = (_state) => {
+}
