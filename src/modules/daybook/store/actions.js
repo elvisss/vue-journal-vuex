@@ -1,6 +1,16 @@
 import journalApi from '@/api/journalApi'
 
-export const loadEntries = async({ commit }) => {
+const promise = () => {
+  return new Promise((resolve, _reject) => {
+    setTimeout(() => {
+      resolve()
+    }, 1000)
+  })
+}
+
+export const loadEntries = async ({ commit }) => {
+  /* commit('setLoading', true) */
+  await promise()
   const { data } = await journalApi.get('/entries.json')
   const entries = []
   for (let id of Object.keys(data)) {
@@ -12,10 +22,11 @@ export const loadEntries = async({ commit }) => {
   commit('setEntries', entries)
 }
 
-export const updateEntry = async({ _commit }) => {
-
+export const updateEntry = async ({ commit }, updateEntry) => {
+  const { id, ...payload } = updateEntry
+  const path = `/entries/${id}.json`
+  await journalApi.put(path, payload)
+  commit('updateEntry', { ...updateEntry })
 }
 
-export const createEntry = async({ _commit }) => {
-
-}
+export const createEntry = async ({ _commit }) => {}

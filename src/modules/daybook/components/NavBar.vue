@@ -7,7 +7,7 @@
         class="d-inline-block align-text-top mx-2"
         height="30"
       />
-      DayBook {{ $store.state.journal.isLoading }}
+      DayBook
     </a>
 
     <div class="d-flex">

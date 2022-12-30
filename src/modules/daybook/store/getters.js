@@ -12,3 +12,7 @@ export const getEntryById = (state) => (id) => {
   if (!entryFound) return
   return { ...entryFound } // delete reference
 }
+
+export const getLoading = ({ isLoading }) => {
+  return isLoading
+}
