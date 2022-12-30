@@ -4,12 +4,12 @@ import router from './router'
 import store from './store'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPhone, faSignOutAlt, faUserSecret, faPlus, faTrashAlt, faUpload, faSave, faSync } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faSignOutAlt, faUserSecret, faPlus, faTrashAlt, faUpload, faSave, faSync, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faAngry } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faPhone, faTwitter, faUserSecret, faSignOutAlt, faAngry, faPlus, faTrashAlt, faUpload, faSave, faSync)
+library.add(faPhone, faTwitter, faUserSecret, faSignOutAlt, faAngry, faPlus, faTrashAlt, faUpload, faSave, faSync, faPlusCircle)
 
 import './scss/styles.scss'
 import './assets/main.css'

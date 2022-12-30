@@ -3,7 +3,7 @@
     <h1>No hay nada seleccionado</h1>
   </div>
   <Fab
-    @on:click="newEntry"
+    @on:click="goToCreateNewEntry"
   />
 </template>
 
@@ -15,8 +15,13 @@ export default {
     Fab: defineAsyncComponent(() => import('../components/Fab.vue'))
   },
   methods: {
-    async newEntry() {
-      console.log('newEntry')
+    goToCreateNewEntry() {
+      this.$router.push({
+        name: 'daybook-entry',
+        params: {
+          daybookid: 'new'
+        }
+      })
     }
   }
 }

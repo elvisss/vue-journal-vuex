@@ -10,6 +10,19 @@
         placeholder="search entry"
       />
     </div>
+
+    <div class="mt-2 d-flex flex-column">
+      <button
+        @click="
+          $router.push({ name: 'daybook-entry', params: { daybookid: 'new' } })
+        "
+        class="btn btn-primary mx-3"
+      >
+        <font-awesome-icon :icon="['fas', 'fa-plus-circle']" />
+        New Entry
+      </button>
+    </div>
+
     <div class="entry-scroll-area">
       <Entry v-for="entry in entriesByTerm" :key="entry.id" :entry="entry" />
     </div>
@@ -43,10 +56,10 @@ export default {
 <style lang="scss" scoped>
 .entry-list-container {
   border-right: 1px solid #2c3e50;
-  height: calc(100vh - 62px);
+  height: calc(100vh - 65px);
 }
 .entry-scroll-area {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 155px);
   overflow-y: auto;
 }
 </style>

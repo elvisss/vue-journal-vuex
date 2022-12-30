@@ -8,7 +8,9 @@ export const updateEntry = (state, updatedEntry) => {
   state.entries[currentEntryIndex] = updatedEntry
 }
 
-export const addEntry = (_state) => {}
+export const addEntry = (state, newEntry) => {
+  state.entries = [newEntry, ...state.entries]
+}
 
 export const setLoading = (state, isLoading) => {
   state.isLoading = isLoading
