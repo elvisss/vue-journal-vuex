@@ -12,6 +12,11 @@ export const loadEntries = async ({ commit }) => {
   /* commit('setLoading', true) */
   await promise()
   const { data } = await journalApi.get('/entries.json')
+  if (!data) {
+    commit('setEntries', [])
+    return
+  }
+
   const entries = []
   for (let id of Object.keys(data)) {
     entries.push({
@@ -37,4 +42,9 @@ export const createEntry = async ({ commit }, newEntry) => {
   }
   commit('addEntry', { ...entryCreated })
   return data.name
+}
+
+export const deleteEntry = async ({ commit }, entryId) => {
+  await journalApi.delete(`/entries/${entryId}.json`)
+  commit('removeEntry', entryId)
 }

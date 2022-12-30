@@ -7,12 +7,12 @@
         <span class="mx-2 fs-4 fw-light">{{ dayMonthYear.year }}</span>
       </div>
       <div>
-        <button class="btn btn-danger mx-2">
+        <button v-if="entry.id" @click="onDeleteEntry" class="btn btn-danger mx-2">
           Borrar
           <font-awesome-icon :icon="['fas', 'fa-trash-alt']" />
         </button>
         <button class="btn btn-primary">
-          Borrar
+          Subir Imagen
           <font-awesome-icon :icon="['fas', 'fa-upload']" />
         </button>
       </div>
@@ -36,7 +36,7 @@
       alt="entry-picture"
     />
 
-    <Fab icon="fa-save" @on:click="saveEntry" />
+    <Fab icon="fa-save" @on:click="onSaveEntry" />
   </template>
 </template>
 
@@ -67,7 +67,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('journal', ['updateEntry', 'createEntry']),
+    ...mapActions('journal', ['updateEntry', 'createEntry', 'deleteEntry']),
     loadEntry() {
       let entry
 
@@ -82,13 +82,17 @@ export default {
         this.entry = entry
       }
     },
-    async saveEntry() {
+    async onSaveEntry() {
       if (this.entry.id) {
         await this.updateEntry(this.entry)
       } else {
         const newId = await this.createEntry(this.entry)
         this.$router.push({ name: 'daybook-entry', params: { daybookid: newId } })
       }
+    },
+    async onDeleteEntry() {
+      await this.deleteEntry(this.entry.id)
+      this.$router.push({ name: 'no-entry' })
     }
   },
   created() {
