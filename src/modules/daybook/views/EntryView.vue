@@ -1,41 +1,49 @@
 <template>
-  <div class="entry-title d-flex justify-content-between p-2">
-    <div>
-      <span class="text-success fs-3 fw-bold">15</span>
-      <span class="mx-1 fs-3">Mes</span>
-      <span class="mx-2 fs-4 fw-light">Year</span>
+  <template v-if="entry">
+    <div class="entry-title d-flex justify-content-between p-2">
+      <div>
+        <span class="text-success fs-3 fw-bold">{{ dayMonthYear.day }}</span>
+        <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
+        <span class="mx-2 fs-4 fw-light">{{ dayMonthYear.year }}</span>
+      </div>
+      <div>
+        <button class="btn btn-danger mx-2">
+          Borrar
+          <font-awesome-icon :icon="['fas', 'fa-trash-alt']" />
+        </button>
+        <button class="btn btn-primary">
+          Borrar
+          <font-awesome-icon :icon="['fas', 'fa-upload']" />
+        </button>
+      </div>
     </div>
-    <div>
-      <button class="btn btn-danger mx-2">
-        Borrar
-        <font-awesome-icon :icon="['fas', 'fa-trash-alt']" />
-      </button>
-      <button class="btn btn-primary">
-        Borrar
-        <font-awesome-icon :icon="['fas', 'fa-upload']" />
-      </button>
+
+    <hr />
+
+    <div class="d-flex flex-column px-3 h-75">
+      <textarea
+        v-model="entry.text"
+        name=""
+        id=""
+        cols="30"
+        rows="3"
+        placeholder="What happened today?"
+      ></textarea>
     </div>
-  </div>
 
-  <hr />
+    <img
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
+      alt="entry-picture"
+    />
 
-  <div class="d-flex flex-column px-3 h-75">
-    <textarea
-      name=""
-      id=""
-      cols="30"
-      rows="3"
-      placeholder="What happened today?"
-    ></textarea>
-  </div>
-
-  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="entry-picture">
-
-  <Fab icon="fa-save" />
+    <Fab icon="fa-save" />
+  </template>
 </template>
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { mapGetters } from 'vuex'
+import getDayMonthYear from '../helpers/getDayMothYear'
 
 export default {
   components: {
@@ -43,8 +51,34 @@ export default {
   },
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      entry: null
+    }
+  },
+  computed: {
+    ...mapGetters('journal', ['getEntryById']),
+    dayMonthYear() {
+      return getDayMonthYear(this.entry.date)
+    }
+  },
+  methods: {
+    loadEntry() {
+      const entry = this.getEntryById(this.id)
+      if (!entry) return this.$router.push({ name: 'no-entry' })
+      this.entry = entry
+    }
+  },
+  created() {
+    this.loadEntry()
+  },
+  watch: {
+    id() {
+      this.loadEntry()
     }
   }
 }

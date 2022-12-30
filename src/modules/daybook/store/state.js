@@ -2,19 +2,19 @@ const state = () => ({
   isLoading: false,
   entries: [
     {
-      id: new Date().getTime(),
+      id: '100',
       date: new Date().toDateString(),
       text: '1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem officia eveniet animi repellat eaque? Rerum eligendi illo totam quam laudantium fugit optio voluptas molestias, maiores voluptatum ipsum pariatur doloribus? Architecto.',
       picture: null,
     },
     {
-      id: new Date().getTime() + 1,
+      id: '101',
       date: new Date().toDateString(),
       text: '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem officia eveniet animi repellat eaque? Rerum eligendi illo totam quam laudantium fugit optio voluptas molestias, maiores voluptatum ipsum pariatur doloribus? Architecto.',
       picture: null,
     },
     {
-      id: new Date().getTime() + 2,
+      id: '102',
       date: new Date().toDateString(),
       text: '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem officia eveniet animi repellat eaque? Rerum eligendi illo totam quam laudantium fugit optio voluptas molestias, maiores voluptatum ipsum pariatur doloribus? Architecto.',
       picture: null,

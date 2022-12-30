@@ -12,9 +12,8 @@ export default {
       name: 'daybook-entry',
       component: () => import('@/modules/daybook/views/EntryView.vue'),
       props: (route) => {
-        const daybookId = Number(route.params.daybookid)
         return {
-          id: isNaN(daybookId) ? 1 : daybookId
+          id: route.params.daybookid
         }
       }
     }
