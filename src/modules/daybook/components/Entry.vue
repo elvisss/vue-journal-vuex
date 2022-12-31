@@ -1,5 +1,5 @@
 <template>
-  <div @click="goTo" class="entry-container mb-3 pointer p-2">
+  <div @click="goTo" class="entry-container mb-3 pointer p-2" :class="selected ? 'selected' : ''">
     <div class="entry-title d-flex align-items-end">
       <span class="text-success fs-5 fw-bold">{{ dayMonthYear.day }}</span>
       <span class="mx-1 fs-5">{{ dayMonthYear.month }}</span>
@@ -19,6 +19,10 @@ export default {
     entry: {
       type: Object,
       required: true
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -47,8 +51,12 @@ export default {
   border-bottom: 1px solid #2c3e50;
   transition: 0.2s all ease-in;
 
+  &.selected {
+    background-color: #09482b;
+  }
+
   &:hover {
-    background-color: lighten($color: black, $amount: 45);
+    background-color: lighten($color: black, $amount: 20);
   }
 }
 

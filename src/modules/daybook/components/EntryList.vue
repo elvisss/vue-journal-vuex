@@ -24,7 +24,12 @@
     </div>
 
     <div class="entry-scroll-area">
-      <Entry v-for="entry in entriesByTerm" :key="entry.id" :entry="entry" />
+      <Entry
+        v-for="entry in entriesByTerm"
+        :key="entry.id"
+        :entry="entry"
+        :selected="isSelected(entry.id)"
+      />
     </div>
   </div>
 </template>
@@ -48,6 +53,11 @@ export default {
     }),
     entriesByTerm() {
       return this.getEntriesByTerm(this.term)
+    }
+  },
+  methods: {
+    isSelected(id) {
+      return this.$route.params.daybookid === id
     }
   }
 }
