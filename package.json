@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
+    "sweetalert2": "^11.6.16",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuex": "^4.0.2"

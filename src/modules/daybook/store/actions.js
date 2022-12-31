@@ -1,4 +1,5 @@
 import journalApi from '@/api/journalApi'
+/* import cloudinaryApi from '@/api/cloudinaryApi' */
 
 const promise = () => {
   return new Promise((resolve, _reject) => {
@@ -30,11 +31,19 @@ export const loadEntries = async ({ commit }) => {
 export const updateEntry = async ({ commit }, updateEntry) => {
   const { id, ...payload } = updateEntry
   const path = `/entries/${id}.json`
+  await promise()
   await journalApi.put(path, payload)
   commit('updateEntry', { ...updateEntry })
 }
 
 export const createEntry = async ({ commit }, newEntry) => {
+ /*  console.log({ newEntry, uploadImage }) */
+  // await promise()
+  /* const { data: cloudinaryData } = await dispatch('uploadImage', uploadImage) */
+  /* const payload = {
+    ...newEntry,
+    picture: cloudinaryData.secure_url
+  } */
   const { data } = await journalApi.post('/entries.json', newEntry)
   const entryCreated = {
     ...newEntry,
@@ -48,3 +57,12 @@ export const deleteEntry = async ({ commit }, entryId) => {
   await journalApi.delete(`/entries/${entryId}.json`)
   commit('removeEntry', entryId)
 }
+
+/* export const uploadImage = async ({ _commit }, file) => {
+  const formData = new FormData()
+  formData.append('upload_preset', import.meta.env.VITE_CLOUDINDARY_UPLOAD_PRESET)
+  formData.append('file', file)
+  const data = await cloudinaryApi.post(`${import.meta.env.VITE_CLOUDINDARY_CLOUD_NAME}/image/upload`, formData)
+  return data
+}
+ */
