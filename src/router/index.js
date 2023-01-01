@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import authRouter from '../modules/auth/router'
 import dayBookRouter from '../modules/daybook/router'
 
 const router = createRouter({
@@ -20,9 +21,13 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
+      path: '/auth',
+      ...authRouter
+    },
+    {
       path: '/daybook',
       ...dayBookRouter
-    }
+    },
   ]
 })
 
