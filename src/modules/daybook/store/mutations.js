@@ -25,3 +25,7 @@ export const removeEntry = (state, entryId) => {
 export const setLoading = (state, isLoading) => {
   state.isLoading = isLoading
 }
+
+export const clearEntries = (state) => {
+  state.entries = []
+}

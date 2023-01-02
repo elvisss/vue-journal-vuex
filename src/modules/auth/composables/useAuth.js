@@ -16,6 +16,7 @@ const useAuth = () => {
 
   const logoutUser = () => {
     store.commit('auth/logoutUser')
+    store.commit('journal/clearEntries')
   }
 
   const checkAuthStatus = async() => {
@@ -25,6 +26,7 @@ const useAuth = () => {
 
   return {
     authStatus: computed(() => store.getters['auth/currentState']),
+    username: computed(() => store.state.auth.user?.name || ''),
 
     // methods
     createUser,

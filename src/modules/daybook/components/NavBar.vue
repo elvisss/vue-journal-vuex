@@ -7,11 +7,11 @@
         class="d-inline-block align-text-top mx-2"
         height="30"
       />
-      DayBook
+      {{ username }}
     </router-link>
 
     <div class="d-flex">
-      <button @click="logout" class="btn btn-outline-info mx-2">
+      <button @click="onLogout" class="btn btn-outline-info mx-2">
         <font-awesome-icon :icon="['fas', 'fa-sign-out-alt']" />
       </button>
     </div>
@@ -25,10 +25,11 @@ import { useRouter } from 'vue-router'
 export default {
   setup() {
     const router = useRouter()
-    const { logoutUser } = useAuth()
+    const { logoutUser, username } = useAuth()
 
     return {
-      logout: () => {
+      username,
+      onLogout: () => {
         logoutUser()
         router.push({ name: 'login' })
       }

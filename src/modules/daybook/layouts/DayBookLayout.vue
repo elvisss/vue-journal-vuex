@@ -37,7 +37,6 @@ export default {
     ...mapActions('journal', ['loadEntries'])
   },
   created() {
-    if (this.entries.length) return
     this.loadEntries()
   },
   computed: {

@@ -30,7 +30,6 @@ export const updateEntry = async ({ commit }, updateEntry) => {
 }
 
 export const createEntry = async ({ commit }, newEntry) => {
- /*  console.log({ newEntry, uploadImage }) */
   // await promise()
   /* const { data: cloudinaryData } = await dispatch('uploadImage', uploadImage) */
   /* const payload = {

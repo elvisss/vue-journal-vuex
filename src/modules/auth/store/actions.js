@@ -24,7 +24,6 @@ export const createUser = async ({ commit }, user) => {
 
     return { ok: true }
   } catch (e) {
-    console.log(e.response)
     return { ok: false, message: e.response.data.error.message }
   }
 }
