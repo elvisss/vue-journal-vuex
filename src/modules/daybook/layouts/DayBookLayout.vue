@@ -13,14 +13,20 @@
   </template>
 
   <template v-else>
-    <div class="d-flex">
-      <div class="col-4">
-        <EntryList />
+    <template v-if="isError">
+      <div style="color: red; text-align: center; margin-top: 60px; font-size: 30px;">An error happened</div>
+    </template>
+
+    <template v-else>
+      <div class="d-flex">
+        <div class="col-4">
+          <EntryList />
+        </div>
+        <div class="col-8">
+          <router-view />
+        </div>
       </div>
-      <div class="col-8">
-        <router-view />
-      </div>
-    </div>
+    </template>
   </template>
 </template>
 
@@ -29,6 +35,11 @@ import { defineAsyncComponent } from 'vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  data() {
+    return {
+      isError: false
+    }
+  },
   components: {
     NavBar: defineAsyncComponent(() => import('../components/NavBar.vue')),
     EntryList: defineAsyncComponent(() => import('../components/EntryList.vue'))
@@ -36,11 +47,14 @@ export default {
   methods: {
     ...mapActions('journal', ['loadEntries'])
   },
-  created() {
-    this.loadEntries()
+  async created() {
+    const { ok } = await this.loadEntries()
+    if (!ok) {
+      this.isError = true
+    }
   },
   computed: {
-    ...mapState('journal', ['isLoading', 'entries'])
+    ...mapState('journal', ['isLoading'])
   }
 }
 </script>

@@ -5,20 +5,27 @@ import { promise } from '@/helpers/promise'
 export const loadEntries = async ({ commit }) => {
   /* commit('setLoading', true) */
   await promise()
-  const { data } = await journalApi.get('/entries.json')
-  if (!data) {
-    commit('setEntries', [])
-    return
-  }
 
-  const entries = []
-  for (let id of Object.keys(data)) {
-    entries.push({
-      id,
-      ...data[id]
-    })
+  try {
+    const { data } = await journalApi.get('/entries.json')
+    if (!data) {
+      commit('setEntries', [])
+      return
+    }
+
+    const entries = []
+    for (let id of Object.keys(data)) {
+      entries.push({
+        id,
+        ...data[id]
+      })
+    }
+    commit('setEntries', entries)
+    return { ok: true }
+  } catch(err) {
+    commit('setLoading', false)
+    return { ok: false }
   }
-  commit('setEntries', entries)
 }
 
 export const updateEntry = async ({ commit }, updateEntry) => {
