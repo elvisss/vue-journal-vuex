@@ -4,6 +4,9 @@ import HomeView from '../views/HomeView.vue'
 import authRouter from '../modules/auth/router'
 import dayBookRouter from '../modules/daybook/router'
 
+import authGuard from './guards/auth-guard'
+import noAuthGuard from './guards/no-auth-guard'
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,10 +25,12 @@ const router = createRouter({
     },
     {
       path: '/auth',
+      beforeEnter: [ noAuthGuard ],
       ...authRouter
     },
     {
       path: '/daybook',
+      beforeEnter: [ authGuard ],
       ...dayBookRouter
     },
   ]

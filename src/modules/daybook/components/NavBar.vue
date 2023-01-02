@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar bg-primary">
-    <a class="navbar-brand text-white" href="/">
+    <router-link class="navbar-brand text-white" :to="{ name: 'home' }">
       <img
         src="@/assets/logo.svg"
         alt=""
@@ -8,7 +8,7 @@
         height="30"
       />
       DayBook
-    </a>
+    </router-link>
 
     <div class="d-flex">
       <button @click="logout" class="btn btn-outline-info mx-2">
