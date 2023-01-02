@@ -1,4 +1,5 @@
 import authApi from '@/api/authApi'
+import { promise } from '@/helpers/promise'
 
 export const createUser = async ({ commit }, user) => {
   const { name, email, password } = user
@@ -49,7 +50,31 @@ export const loginUser = async ({ commit }, { email, password }) => {
     return { ok: false, message: err.response.data.error.message }
   }
 }
-/*
-export const logoutUser = async ({ commit }) => {
-  commit
-} */
+
+export const checkAuthentication = async ({ commit }) => {
+  await promise(2000)
+
+  const idToken = localStorage.getItem('idToken')
+  const refreshToken = localStorage.getItem('refreshToken')
+
+  if (!idToken || !refreshToken) {
+    commit('logoutUser')
+    return { ok: false, message: 'there is no token' }
+  }
+
+  try {
+    const { data } = await authApi.post(':lookup', {
+      idToken
+    })
+    const { email, displayName } = data.users[0]
+    const user = {
+      name: displayName,
+      email
+    }
+    commit('loginUser', { user, idToken, refreshToken })
+    return { ok: true }
+  } catch (err) {
+    commit('logoutUser')
+    return { ok: false, message: err.response.data.error.message }
+  }
+}

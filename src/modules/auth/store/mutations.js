@@ -2,13 +2,11 @@ export const loginUser = (state, { user, idToken, refreshToken }) => {
   if (idToken) {
     localStorage.setItem('idToken', idToken)
   }
-
   state.idToken = idToken
 
   if (refreshToken) {
     localStorage.setItem('refreshToken', refreshToken)
   }
-
   state.refreshToken = refreshToken
 
   state.user = user
@@ -20,5 +18,7 @@ export const logoutUser = (state) => {
   localStorage.removeItem('refreshToken')
 
   state.user = null
-  state.state = 'not-authenticated'
+  state.idToken = ''
+  state.refreshToken = ''
+  state.status = 'not-authenticated'
 }

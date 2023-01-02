@@ -1,13 +1,6 @@
 import journalApi from '@/api/journalApi'
+import { promise } from '@/helpers/promise'
 /* import cloudinaryApi from '@/api/cloudinaryApi' */
-
-const promise = () => {
-  return new Promise((resolve, _reject) => {
-    setTimeout(() => {
-      resolve()
-    }, 1000)
-  })
-}
 
 export const loadEntries = async ({ commit }) => {
   /* commit('setLoading', true) */
