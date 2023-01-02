@@ -49,3 +49,7 @@ export const loginUser = async ({ commit }, { email, password }) => {
     return { ok: false, message: err.response.data.error.message }
   }
 }
+/*
+export const logoutUser = async ({ commit }) => {
+  commit
+} */

@@ -13,10 +13,15 @@ const useAuth = () => {
     return res
   }
 
+  const logoutUser = () => {
+    store.commit('auth/logoutUser')
+  }
+
   return {
     // methods
     createUser,
     loginUser,
+    logoutUser,
   }
 }
 

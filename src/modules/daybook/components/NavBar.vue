@@ -11,7 +11,7 @@
     </a>
 
     <div class="d-flex">
-      <button class="btn btn-outline-info mx-2">
+      <button @click="logout" class="btn btn-outline-info mx-2">
         <font-awesome-icon :icon="['fas', 'fa-sign-out-alt']" />
       </button>
     </div>
@@ -19,5 +19,20 @@
 </template>
 
 <script>
-export default {}
+import useAuth from '@/modules/auth/composables/useAuth'
+import { useRouter } from 'vue-router'
+
+export default {
+  setup() {
+    const router = useRouter()
+    const { logoutUser } = useAuth()
+
+    return {
+      logout: () => {
+        logoutUser()
+        router.push({ name: 'login' })
+      }
+    }
+  }
+}
 </script>
