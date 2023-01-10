@@ -1,8 +1,13 @@
-const authGuard = async(_to, _from, next) => {
+const authGuard = (to, _from, next) => {
   const isAuthenticated = !!localStorage.getItem('idToken')
 
   if (!isAuthenticated) {
-    next({ name: 'login' })
+    return {
+      name: 'login',
+      query: {
+        redirect: to.fullPath
+      }
+    }
   } else {
     next()
   }
